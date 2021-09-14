@@ -1,4 +1,4 @@
-### Simulate river temperature in relation to discharge with random effect of river
+### Simulate river temperature in relation to discharge with random intercept and slope for each river
 rm(list = ls())
 library(jmbr)
 library(ggplot2)
