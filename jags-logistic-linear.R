@@ -1,4 +1,4 @@
-### simulate data
+### Simulate detection efficiency change over distance of telemetry receiver
 library(jmbr)
 library(ggplot2)
 
@@ -6,8 +6,9 @@ distance <- runif(100, 0, 1000)
 bDistance <- -0.02
 bIntercept <- 4
 x <- bIntercept + bDistance*distance
+
 p <- 1/(1 + exp(-x))
-pings <- round(runif(100, 30, 70))
+pings <- round(runif(100, 50, 60))
 detects <- rbinom(100, size = pings, p = p)
 
 data <- data.frame(Distance = distance, 
