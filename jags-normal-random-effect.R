@@ -8,12 +8,12 @@ nriver <- 9
 n <- sample(x = 50:70, size = nriver, replace = TRUE)
 
 sTemperature <- 1 # sd of overall mu
-bSlope <- -0.12 # typical effect of discharge
+bSlope <- -0.1 # typical effect of discharge
 bIntercept <- 25 # typical intercept
 
 # generate random slopes + intercepts
-sSlopeRiver <- 0.04 # sd of random effect
-sInterceptRiver <- 1.4 # sd of random intercept
+sSlopeRiver <- 0.05 # sd of random effect
+sInterceptRiver <- 1.5 # sd of random intercept
 bSlopeRiver <- rnorm(nriver, bSlope, sSlopeRiver)
 bInterceptRiver <- rnorm(nriver, bIntercept, sInterceptRiver)
 
