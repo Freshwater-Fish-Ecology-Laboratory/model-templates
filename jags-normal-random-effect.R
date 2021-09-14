@@ -4,33 +4,27 @@ library(jmbr)
 library(ggplot2)
 
 nriver <- 9
-
-# assign obs to rivers
+# generate samples per river
 n <- sample(x = 50:70, size = nriver, replace = TRUE)
 
-discharge <- runif(200, 0, 50)
-
-bSigma <- 1 # sd of overal mu
+sTemperature <- 1 # sd of overall mu
 bSlope <- -0.12 # typical effect of discharge
 bIntercept <- 25 # typical intercept
-sSlope <- 0.04 # sd of random effect
-sIntercept <- 1.4 # sd of random intercept
 
-betas <- rnorm(nriver, bSlope, sSlope)
-alphas <- rnorm(nriver, bIntercept, sIntercept)
+# generate random slopes + intercepts
+sSlopeRiver <- 0.04 # sd of random effect
+sInterceptRiver <- 1.4 # sd of random intercept
+bSlopeRiver <- rnorm(nriver, bSlope, sSlopeRiver)
+bInterceptRiver <- rnorm(nriver, bIntercept, sInterceptRiver)
 
 library(purrr)
-data <- map_df(seq_len(nriver), function(x){
-  alpha <- alphas[x]
-  beta <- betas[x]
-  disch <- sample(discharge, size = n[x])
-  mu <- alpha + beta*disch
-  temp <- rnorm(n = n[x], mean = mu, sd = bSigma)
-  data.frame(River = factor(x), 
-             bIntercept = alpha,
-             bSlope = beta,
+data <- map_df(seq_len(nriver), function(i){
+  discharge <- runif(n[i], 0, 50)
+  mu <- bInterceptRiver[i] + bSlopeRiver[i]*discharge
+  temp <- rnorm(n = n[i], mean = mu, sd = sTemperature)
+  data.frame(River = factor(i), 
              Temperature = temp,
-             Discharge = disch)
+             Discharge = discharge)
 })
 
 ggplot(data = data, aes(x = Discharge, y = Temperature, color = River)) +
@@ -85,4 +79,5 @@ print(gp)
 ### questions
 # Is it normal to have very low svalues for random slopes/intercepts?
 # the by-river slope and intercept coefficient values are differences from the mean, correct?
+# naming convention for overall sigma?
 
