@@ -1,7 +1,5 @@
 ### Simulate river temperature in relation to discharge with random intercept and slope for each river
-rm(list = ls())
-library(jmbr)
-library(ggplot2)
+source("header.R")
 
 nriver <- 9
 # generate samples per river

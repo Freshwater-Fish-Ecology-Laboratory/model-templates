@@ -1,6 +1,5 @@
 ### Simulate detection efficiency change over distance of telemetry receiver
-library(jmbr)
-library(ggplot2)
+source("header.R")
 
 distance <- runif(100, 0, 1000)
 bDistance <- -0.02

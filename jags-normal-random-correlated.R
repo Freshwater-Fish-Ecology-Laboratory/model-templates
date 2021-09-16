@@ -1,10 +1,6 @@
 ### Simulate river temperature in relation to discharge
 # River is random effect with correlated random intercept and slope 
-
-rm(list = ls())
-library(jmbr)
-library(ggplot2)
-library(MASS)
+source("header.R")
 
 set.seed(100)
 

@@ -1,6 +1,5 @@
 ### simulate detection efficiency wth negative association to distance and positive association with discharge
-library(jmbr)
-library(ggplot2)
+source("header.R")
 
 distance <- runif(100, 0, 1000)
 discharge <- runif(100, 100, 300)

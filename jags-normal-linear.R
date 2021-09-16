@@ -1,6 +1,5 @@
 ### Simulate river temperature in relation to discharge
-library(jmbr)
-library(ggplot2)
+source("header.R")
 
 discharge <- runif(100, 0, 50)
 bDischarge <- -0.2

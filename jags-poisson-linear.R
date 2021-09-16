@@ -1,6 +1,5 @@
 ### Simulate count of fish by lake size 
-library(jmbr)
-library(ggplot2)
+source("header.R")
 
 area <- runif(100, 0, 20)
 bArea <- 0.15
