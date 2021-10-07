@@ -42,7 +42,7 @@ model <- model("
     Temperature[i] ~ normal(eTemperature[i], sTemperature);
   }
 }", new_expr = "
-  for(i in 1:length(Discharge) {
+  for(i in 1:length(Discharge)) {
    prediction[i] <- bIntercept + bDischarge * Discharge[i] 
 
   fit[i] <- prediction[i]
@@ -54,7 +54,7 @@ model <- model("
 
 analysis <- analyse(model, data = data)
 coef(analysis, simplify = TRUE)
-prediction <- predict(analysis, new_data = c("Distance")) 
+prediction <- predict(analysis, new_data = c("Discharge")) 
 
 gp <- ggplot(data = prediction, aes(x = Discharge, y = estimate)) +
   geom_point(data = data, aes(y = Temperature)) +
