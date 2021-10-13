@@ -6,7 +6,7 @@ set.seed(100)
 
 nriver <- 10
 # generate samples per river
-n <- sample(x = 50:70, size = nriver, replace = TRUE)
+n <- sample(x = 7:10, size = nriver, replace = TRUE)
 
 sTemperature <- 1 # sd of overall mu
 bSlope <- -0.1 # typical effect of discharge
@@ -45,7 +45,7 @@ model <- model("model {
 
   bIntercept ~ dnorm(20, 5^-2)
   bSlope ~ dnorm(0, 5^-2)
-  bSigma ~ dnorm(1, 5^-2) T(0,)
+  bSigma ~ dnorm(0, 5^-2) T(0,)
   
   sInterceptRiver ~ dnorm(0, 5^-2) T(0,)
   sSlopeRiver ~ dnorm(0, 5^-2) T(0,)
@@ -99,7 +99,7 @@ gp <- ggplot(data = prediction, aes(x = Discharge, y = estimate,
 print(gp)
 
 ### how does model without bivariate normal perform?
-model <- model("model {
+model_nocor <- model("model {
 
   bIntercept ~ dnorm(20, 5^-2)
   bSlope ~ dnorm(0, 5^-2)
@@ -132,7 +132,7 @@ model <- model("model {
                random_effects = list(bInterceptRiver = "River",
                                      bSlopeRiver = "River"))
 
-analysis <- analyse(model, data = data)
+analysis <- analyse(model_nocor, data = data)
 print(coef(analysis, simplify = TRUE), n = 100)
 prediction <- predict(analysis, new_data = c("Discharge", "River")) 
 
