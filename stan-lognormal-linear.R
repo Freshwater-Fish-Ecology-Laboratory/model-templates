@@ -4,7 +4,7 @@ source("header.R")
 
 length <- runif(100, 30, 50)
 bLength <- 3
-bIntercept <- -5
+bIntercept <- -9
 sWeight <- -2
 x <- bIntercept + bLength * log(length)
 weight <- rlnorm(100, mean = x, sd = exp(sWeight))
@@ -53,8 +53,7 @@ new_expr = "
   }
 ",
 select_data = list(Weight = 1, "Length" = 1),
-nthin = 2L
-)
+nthin = 2L)
 
 analysis <- analyse(model, data = data)
 coef(analysis, simplify = TRUE)
