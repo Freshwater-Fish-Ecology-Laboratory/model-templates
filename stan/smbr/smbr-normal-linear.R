@@ -14,7 +14,7 @@ data <- data.frame(Discharge = discharge,
 ggplot(data = data, aes(x = Discharge, y = Temperature)) +
   geom_point()
 
-model <- model("
+model <- mbr::model("
   data {
     int nObs;
     

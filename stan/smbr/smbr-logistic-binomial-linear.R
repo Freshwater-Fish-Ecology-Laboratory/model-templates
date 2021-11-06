@@ -20,7 +20,7 @@ ggplot(data = data, aes(x = Area, y = Presence/Transects)) +
 
 message("why does this model run even when remove the priors?")
 
-model <- model("
+model <- mbr::model("
 
 data {
   int<lower=0> nObs;
@@ -53,6 +53,9 @@ model {
                                   Transects = 1L,
                                   `Area` = c(0, 10000)))
 
+m <- brms::brm(formula = Presence | trials(Transects) ~ Area,
+               data = data, family = "binomial")
+summary(m)
 analysis <- analyse(model, data = data)
 coef(analysis, simplify = TRUE)
 prediction <- predict(analysis, new_data = c("Area")) 
